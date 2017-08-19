@@ -2,8 +2,8 @@
 
 ### What is this project?
 
-This is the configuration repo for Peril on the CocoaPods org. There is a [settings file](settings.json) and org-wide
-dangerfiles which are inside the [org folder](org).
+This is the configuation repo for Peril on the CocoaPods org. There is a [settings file](settings.json) and org-wide
+dangerfiles which ae insde the [org folder](org).
 
 Here's some links to the key things
 
