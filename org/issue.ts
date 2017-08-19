@@ -1,12 +1,14 @@
 import { danger, schedule } from "danger"
 
-const issue = danger.github as any // danger/peril#128
+
+const gh = danger.github as any // danger/peril#128
+const issue = gh.issue
 
 // Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods"
 //
 if (issue.body.includes("Cocoapods")) {
   const newBody = issue.body.replace(/Cocoapods/, "CocoaPods")
-  const repo = issue.repository
+  const repo = gh.repository
 
   schedule(async () => {
     await danger.github.api.issues.edit({
