@@ -1,4 +1,5 @@
 import { danger, schedule, markdown } from "danger"
+import * as Diff from "text-diff"
 
 const gh = danger.github as any // danger/peril#128
 const issue = gh.issue
@@ -7,7 +8,7 @@ const repo = gh.repository
 // Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods"
 //
 if (issue.body.includes("Cocoapods")) {
-  const newBody = issue.body.replace(/Cocoapods/, "CocoaPods")
+  const newBody = issue.body.replace(/Cocoapods/g, "CocoaPods")
 
   schedule(async () => {
     await danger.github.api.issues.edit({
@@ -30,13 +31,15 @@ schedule( async () => {
     repo: repo.name,
     path: ".github/ISSUE_TEMPLATE.md"
   })
-  const buffer = new Buffer(ghIssueTemplateResponse.content, "base64")
+  
+  const buffer = new Buffer(ghIssueTemplateResponse.data.content, "base64")
   const template = buffer.toString()
-
-  if (buffer && buffer === issue.body) {
+  
+  // Whitespace between code on disk vs text which comes from GitHub is different.
+  // This took far too long to figure.
+  if (template && template.replace(/\s+/g, "") === issue.body.replace(/\s+/g, "")) {
     markdown(`
-Hi there, thanks for the issue, but it seem that this issue is just the default template. Please re-create an issue with 
-the template filled out.
+Hi there, thanks for the issue, but it seem that this issue is just the default template. Please create a new issue with the template filled out.
     `)
 
     await danger.github.api.issues.edit({
@@ -47,4 +50,3 @@ the template filled out.
     })
   }
 })
-

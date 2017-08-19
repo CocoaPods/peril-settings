@@ -1,6 +1,6 @@
 {
   "settings": {
-    "plugins": ["danger-plugin-spellcheck"]
+    "modules": ["danger-plugin-spellcheck", "text-diff"]
   },
   "rules": {
     "pull_request": "CocoaPods/peril-settings@org/pr.ts",
