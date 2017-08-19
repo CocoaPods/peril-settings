@@ -3,8 +3,8 @@
     "plugins": ["danger-plugin-spellcheck"]
   },
   "rules": {
-    "pull_request": "CocoaPods/peril_settings@org/pr.ts",
-    "issues.opened": "CocoaPods/peril_settings@org/issue.ts"
+    "pull_request": "CocoaPods/peril-settings@org/pr.ts",
+    "issues.opened": "CocoaPods/peril-settings@org/issue.ts"
   },
   "repos": {
   }
