@@ -7,7 +7,7 @@ const issue = gh.issue
 // Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods"
 //
 if (issue.body.includes("Cocoapods")) {
-  const newBody = issue.body.replace(/Cocoapods/, "CocoaPods")
+  const newBody = issue.body.replace(/Cocoapods/g, "CocoaPods")
   const repo = gh.repository
 
   schedule(async () => {
