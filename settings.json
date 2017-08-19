@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "plugins": ["danger-plugin-spellcheck"]
+  },
+  "rules": {
+    "pull_request": "CocoaPods/peril_settings@org/pr.ts",
+    "issues.opened": "CocoaPods/peril_settings@org/issue.ts"
+  },
+  "repos": {
+  }
+}
