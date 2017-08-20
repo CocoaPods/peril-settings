@@ -80,5 +80,5 @@
     "CHANGELOG",
     "podspec"
   ],
-  "whitelistedMarkdowns": ["CHANGELOG.md"]
+  "whitelistFiles": ["CHANGELOG.md"]
 }
