@@ -5,10 +5,13 @@ const gh = danger.github as any // danger/peril#128
 const issue = gh.issue
 const repo = gh.repository
 
-// Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods"
-//
-if (issue.body.includes("Cocoapods")) {
-  const newBody = issue.body.replace(/Cocoapods/g, "CocoaPods")
+// Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods".
+// Wrap it in whitespace to avoid changing links.
+if (issue.body.includes(" Cocoapods ")) {
+
+  // > "aCocoapods CocoaPods Cocoapods ".replace(/ Cocoapods /g, " CocoaPods ")
+  // => 'aCocoapods CocoaPods CocoaPods '
+  const newBody = issue.body.replace(/ Cocoapods /g, " CocoaPods ")
 
   schedule(async () => {
     await danger.github.api.issues.edit({
