@@ -27,10 +27,11 @@ if (issue.body.includes(" Cocoapods ")) {
 schedule(async () => {
   const repo = gh.repository
 
-  let ghIssueTemplateResponse
+  // A failing request for contents via the API throws, so we need to 
+  // catch it safely.
   try {
     // danger/peril#129
-    ghIssueTemplateResponse = await danger.github.api.repos.getContent({
+    const ghIssueTemplateResponse = await danger.github.api.repos.getContent({
       owner: repo.owner.login,
       repo: repo.name,
       path: ".github/ISSUE_TEMPLATE.md"
