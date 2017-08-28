@@ -78,7 +78,10 @@
     "config",
     "linux",
     "CHANGELOG",
-    "podspec"
+    "podspec",
+    "spec",
+    "specs",
+    "subspecs"
   ],
   "whitelistFiles": ["CHANGELOG.md"]
 }
