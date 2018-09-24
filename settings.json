@@ -2,6 +2,7 @@
   "rules": {
     "pull_request": "org/pr.ts",
     "issues.opened": "org/issue.ts",
-    "issue_comment.created": "org/issue.ts"
+    "issue_comment.created": ["org/issue.ts", "org/markAsMergeOnGreen.ts"],
+    "status.success": "org/mergeOnGreen.ts"
   }
 }
