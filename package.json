@@ -6,8 +6,9 @@
   "author": "Orta Therox <orta@artsymail.com>",
   "license": "MIT",
   "dependencies": {
-    "danger": "^2.0.0-alpha.8",
-    "text-diff": "^1.0.1",    
+    "danger": "^4.0",
+    "github-webhook-event-types": "^1.1.0",
+    "text-diff": "^1.0.1",
     "typescript": "^2.3.2"
   },
   "devDependencies": {
