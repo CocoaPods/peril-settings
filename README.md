@@ -10,7 +10,10 @@ Here's some links to the key things
  - [Peril](https://github.com/danger/peril)
  - [Danger JS](http://danger.systems/js/)
  - [Peril for Orgs](https://github.com/danger/peril/blob/master/docs/setup_for_org.md)
- - [Peril on the CocoaPods Heroku team](https://dashboard.heroku.com/apps/cocoapods-peril)
+ - [Staging Dashboard](https://staging-dashboard.peril.systems)
+
+This org runs on Peril Staging.
+
 
 ### TLDR on this Repo?
 

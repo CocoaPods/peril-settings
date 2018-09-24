@@ -1,45 +1,30 @@
-import { danger, schedule, markdown } from "danger";
-import * as Diff from "text-diff";
+import { danger, markdown } from "danger";
+import { Issues } from "github-webhook-event-types"
 
-const gh = danger.github as any; // danger/peril#128
-const issue = gh.issue;
-const repo = gh.repository;
+export default async (webhook: Issues) => {
+  const issue = webhook.issue
+  const repo = webhook.repository
 
-// Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods".
-// Wrap it in whitespace to avoid changing links.
-if (issue.body.includes(" Cocoapods ")) {
+  // Support quietly transforming issue bodies from "Cocoapods" to "CocoaPods".
+  // Wrap it in whitespace to avoid changing links.
+  
   // > "aCocoapods CocoaPods Cocoapods ".replace(/ Cocoapods /g, " CocoaPods ")
   // => 'aCocoapods CocoaPods CocoaPods '
-  const newBody = issue.body.replace(/ Cocoapods /g, " CocoaPods ");
 
-  schedule(async () => {
+  const newBody = issue.body.replace(/ Cocoapods /g, " CocoaPods ")
+                            .replace(/ XCode /g, " Xcode ");
+
+  // Update the comment
+  if (newBody !== issue.body) {
     await danger.github.api.issues.edit({
       owner: repo.owner.login,
       repo: repo.name,
       number: issue.number,
       body: newBody
     })
-  })
-}
-
-// Support quietly transforming issue bodies from "XCode" to "Xcode".
-if (issue.body.includes("XCode")) {
-  const newBody = issue.body.replace(/XCode/g, "Xcode");
-
-  schedule(async () => {
-    await danger.github.api.issues.edit({
-      owner: repo.owner.login,
-      repo: repo.name,
-      number: issue.number,
-      body: newBody
-    })
-  })
-}
-
-// Support checking if the issue has the same content as the issue template.
-
-schedule(async () => {
-  const repo = gh.repository
+  }
+  
+  // Support checking if the issue has the same content as the issue template.
 
   // A failing request for contents via the API throws, so we need to 
   // catch it safely.
@@ -68,4 +53,5 @@ schedule(async () => {
     }
 
   } catch (error) {}
-});
+
+}
