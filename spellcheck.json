@@ -81,7 +81,9 @@
     "podspec",
     "spec",
     "specs",
-    "subspecs"
+    "subspecs",
+    "org-wide",
+    "orgs"
   ],
   "whitelistFiles": ["CHANGELOG.md"]
 }
