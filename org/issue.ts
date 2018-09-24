@@ -22,6 +22,20 @@ if (issue.body.includes(" Cocoapods ")) {
   })
 }
 
+// Support quietly transforming issue bodies from "XCode" to "Xcode".
+if (issue.body.includes("XCode")) {
+  const newBody = issue.body.replace(/XCode/g, "Xcode");
+
+  schedule(async () => {
+    await danger.github.api.issues.edit({
+      owner: repo.owner.login,
+      repo: repo.name,
+      number: issue.number,
+      body: newBody
+    })
+  })
+}
+
 // Support checking if the issue has the same content as the issue template.
 
 schedule(async () => {
