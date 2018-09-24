@@ -55,5 +55,3 @@ export default async (webhook: Issues) => {
   } catch (error) {}
 
 }
-
-

@@ -1,11 +1,7 @@
 {
-  "settings": {
-    "modules": ["danger-plugin-spellcheck", "text-diff"]
-  },
   "rules": {
-    "pull_request": "CocoaPods/peril-settings@org/pr.ts",
-    "issues.opened": "CocoaPods/peril-settings@org/issue.ts"
-  },
-  "repos": {
+    "pull_request": "org/pr.ts",
+    "issues.opened": "org/issue.ts",
+    "issue_comment.created": "org/issue.ts"
   }
 }
