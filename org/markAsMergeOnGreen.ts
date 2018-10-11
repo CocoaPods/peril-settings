@@ -16,6 +16,7 @@ export const rfc10 = async (issueComment: IssueComment) => {
   const issue = issueComment.issue
   const comment = issueComment.comment
   const api = danger.github.api
+  const labelName = "Merge On Green"
 
   // Only look at PR issue comments, this isn't in the type system
   if (!(issue as any).pull_request) {
@@ -23,14 +24,14 @@ export const rfc10 = async (issueComment: IssueComment) => {
   }
 
   // Don't do any work unless we have to
-  const keywords = ["merge on green", "merge on ci green"]
+  const keywords = ["@CocoaPodsBot merge on green", "@CocoaPodsBot merge on ci green"]
   const match = keywords.find(k => comment.body.toLowerCase().includes(k))
   if (!match) {
     return console.log(`Did not find any of the merging phrases in the comment.`)
   }
 
   // Check to see if the label has already been set
-  if (issue.labels.find(l => l.name === "Merge On Green")) {
+  if (issue.labels.find(l => l.name === labelName)) {
     return console.log("Already has Merge on Green")
   }
 
@@ -49,7 +50,7 @@ export const rfc10 = async (issueComment: IssueComment) => {
 
   // Let's people know that it will be merged
   const label = {
-    name: "Merge On Green",
+    name: labelName,
     color: "247A38",
     description: "A label to indicate that Peril should merge this PR when all statuses are green",
   }
