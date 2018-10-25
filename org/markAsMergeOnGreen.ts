@@ -24,7 +24,7 @@ export const rfc10 = async (issueComment: IssueComment) => {
   }
 
   // Don't do any work unless we have to
-  const keywords = ["@CocoaPodsBot merge on green", "@CocoaPodsBot merge on ci green"]
+  const keywords = ["@cocoapodsbot merge on green", "@cocoapodsbot merge on ci green"]
   const match = keywords.find(k => comment.body.toLowerCase().includes(k))
   if (!match) {
     return console.log(`Did not find any of the merging phrases in the comment.`)
