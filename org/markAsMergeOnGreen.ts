@@ -1,16 +1,6 @@
 import { danger } from "danger"
 import { IssueComment } from "github-webhook-event-types"
 
-// The shape of a label
-interface Label {
-  id: number
-  url: string
-  name: string
-  description: string
-  color: string
-  default: boolean
-}
-
 /** If a comment to an issue contains "Merge on Green", apply a label for it to be merged when green. */
 export const rfc10 = async (issueComment: IssueComment) => {
   const issue = issueComment.issue
