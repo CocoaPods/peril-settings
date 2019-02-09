@@ -16,10 +16,10 @@ export default async (webhook: IssueComment) => {
 
   // Update the comment
   if (newBody !== comment.body) {
-    await danger.github.api.issues.editComment({
+    await danger.github.api.issues.updateComment({
       owner: repo.owner.login,
       repo: repo.name,
-      comment_id: String(comment.id),
+      comment_id: comment.id,
       body: newBody
     })
   }

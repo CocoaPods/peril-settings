@@ -1,4 +1,4 @@
-import { schedule, danger, markdown } from "danger"
+import { danger } from "danger"
 import { Status } from "github-webhook-event-types"
 import { LabelLabel } from "github-webhook-event-types/source/Label"
 
@@ -36,7 +36,7 @@ export const rfc10 = async (status: Status) => {
     }
 
     // Merge the PR
-    await api.pullRequests.merge({ owner, repo, number, commit_title: `Merge pull request #${number} by Peril` })
+    await api.pulls.merge({ owner, repo, number, commit_title: `Merge pull request #${number} by Peril` })
     console.log(`Merged Pull Request ${number}`)
   }
 }

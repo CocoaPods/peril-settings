@@ -26,6 +26,9 @@ run on every issue and pull request for all CocoaPods Repos.
 git clone https://github.com/CocoaPods/peril-settings.git
 yarn install
 code .
+
+# Verify your TypeScript compiles
+yarn type-check 
 ```
 
 You will need node and yarn installed beforehand. You can get them both by running `brew install yarn`. 

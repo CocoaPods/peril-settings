@@ -1,4 +1,4 @@
-import { danger, markdown } from "danger";
+import { danger } from "danger";
 import { Issues } from "github-webhook-event-types"
 
 export default async (webhook: Issues) => {
@@ -14,9 +14,9 @@ export default async (webhook: Issues) => {
   const newBody = issue.body.replace(/ Cocoapods /g, " CocoaPods ")
                             .replace(/ XCode /g, " Xcode ");
 
-  // Update the comment
+  // Update the comment, make all our lives easier
   if (newBody !== issue.body) {
-    await danger.github.api.issues.edit({
+    await danger.github.api.issues.update({
       owner: repo.owner.login,
       repo: repo.name,
       number: issue.number,
@@ -30,7 +30,7 @@ export default async (webhook: Issues) => {
   // catch it safely.
   try {
     // danger/peril#129
-    const ghIssueTemplateResponse = await danger.github.api.repos.getContent({
+    const ghIssueTemplateResponse = await danger.github.api.repos.getContents({
       owner: repo.owner.login,
       repo: repo.name,
       path: ".github/ISSUE_TEMPLATE.md"
@@ -42,9 +42,16 @@ export default async (webhook: Issues) => {
     // Whitespace between code on disk vs text which comes from GitHub is different.
     // This took far too long to figure.
     if (template && template.replace(/\s+/g, "") === issue.body.replace(/\s+/g, "")) {
-      markdown(`Hi there, thanks for the issue, but it seem that this issue is just the default template. Please create a new issue with the template filled out.`);
+      // Post a message
+      await danger.github.api.issues.createComment({
+        owner: repo.owner.login,
+        repo: repo.name,
+        number: issue.number,
+        body: `Hi there, thanks for the issue, but it seem that this issue is just the default template. Please create a new issue with the template filled out.`
+      })
 
-      await danger.github.api.issues.edit({
+      // Close the issue
+      await danger.github.api.issues.update({
         owner: repo.owner.login,
         repo: repo.name,
         number: issue.number,
