@@ -41,7 +41,7 @@ export default async (webhook: Issues) => {
 
     // Whitespace between code on disk vs text which comes from GitHub is different.
     // This took far too long to figure.
-    if (template && template.replace(/\s+/g, "") === issue.body.replace(/\s+/g, "")) {
+    if (issue.state === "open" && template && template.replace(/\s+/g, "") === issue.body.replace(/\s+/g, "")) {
       // Post a message
       await danger.github.api.issues.createComment({
         owner: repo.owner.login,
